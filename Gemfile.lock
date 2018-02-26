@@ -42,6 +42,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (10.0.0)
+    cancancan (2.1.3)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     devise (4.3.0)
@@ -144,6 +145,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  cancancan
   devise
   devise_token_auth
   ffaker
