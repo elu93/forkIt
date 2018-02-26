@@ -138,6 +138,7 @@ deletePost = async (postId) => {
         <div>
         <button onClick={this.signOut}>Sign Out</button>
         <Link to="/restaurants">Go to Restaurants</Link>
+        <Link to="/signUp">Home</Link>
           <Switch>
             <Route exact path="/signUp" render={SignUpLogInComponent} />
             <Route exact path="/posts" render={PostsComponent} />
