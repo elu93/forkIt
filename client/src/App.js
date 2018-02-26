@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom'
-import SignUpLogIn from './components/SignUpLogIn'
+import SignUpLogIn from './components/SignUpLogin'
 import axios from 'axios'
 import PostsList from './components/PostsList'
-// import RestaurantsList from './components/RestaurantsList'
+import RestaurantsList from './components/RestaurantsList'
 import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil';
-// import Placeholder from './components/Placeholder'
 
 class App extends Component {
 
@@ -43,16 +42,16 @@ class App extends Component {
     }
   }
 
-  // getRestaurants = async () => {
-  //   try {
-  //     const response = await axios.get('/restaurants')
-  //     return response.data
+  getRestaurants = async () => {
+    try {
+      const response = await axios.get('/restaurants')
+      return response.data
 
-  //   } catch (error) {
-  //     console.log(error)
-  //     return []
-  //   }
-  // }
+    } catch (error) {
+      console.log(error)
+      return []
+    }
+  }
 
   signUp = async (email, password, password_confirmation) => {
     try {
@@ -128,26 +127,20 @@ deletePost = async (postId) => {
       deletePost={this.deletePost} />
     )
 
-    // const PlaceholderComponent = () => (
-    //   <Placeholder/>
-    // )
-
-    // const RestaurantComponent = () => (
-    //   <RestaurantsList 
-    //   restaurants={this.state.restaurants}
-    //   />
-    // )
+    const RestaurantComponent = () => (
+      <RestaurantsList 
+      restaurants={this.state.restaurants}
+      />
+    )
 
     return (
       <Router>
         <div>
         <button onClick={this.signOut}>Sign Out</button>
-        {/* <Link to="/blogs">Go to Blogs</Link> */}
-        {/* <Link to="/restaurants">Go to Restaurants</Link> */}
+        <Link to="/restaurants">Go to Restaurants</Link>
           <Switch>
             <Route exact path="/signUp" render={SignUpLogInComponent} />
             <Route exact path="/posts" render={PostsComponent} />
-            <Route exact path="/blogs" render={PlaceholderComponent} />
             <Route exact path="/restaurants" render={RestaurantComponent} />
           </Switch>
 
