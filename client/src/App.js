@@ -5,6 +5,7 @@ import axios from 'axios'
 import PostsList from './components/PostsList'
 import RestaurantsList from './components/RestaurantsList'
 import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil';
+import StickyNav from './components/Navbar'
 
 class App extends Component {
 
@@ -136,6 +137,7 @@ deletePost = async (postId) => {
     return (
       <Router>
         <div>
+        <StickyNav />
         <button onClick={this.signOut}>Sign Out</button>
         <Link to="/restaurants">Go to Restaurants</Link>
         <Link to="/signUp">Home</Link>
