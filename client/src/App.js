@@ -7,6 +7,7 @@ import RestaurantsList from './components/RestaurantsList'
 import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil';
 import StickyNav from './components/materialize/Navbar.js'
 import RestaurantShow from './components/RestaurantShow'
+import FoodsComponent from './components/FoodsComponent'
 
 class App extends Component {
 
@@ -147,6 +148,7 @@ deletePost = async (postId) => {
             <Route exact path="/posts" render={PostsComponent} />
             <Route exact path="/restaurants" render={RestaurantComponent} />
             <Route exact path="/restaurants/:id" component={RestaurantShow}/>
+            <Route exact path="/foods" component={FoodsComponent} />
           </Switch>
 
           {this.state.signedIn ? <Redirect to="/restaurants" /> : <Redirect to="/signUp" />}

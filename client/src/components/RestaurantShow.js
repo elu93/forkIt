@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class RestaurantShow extends Component {
     state = {
@@ -26,6 +27,7 @@ class RestaurantShow extends Component {
             <div>
                 <h1>{this.state.restaurant.name}</h1>
                 <img src={this.state.restaurant.image} />
+                <div><Link to="/foods">View Menu</Link></div>
                 {
                     this.state.posts.map((post) => {
                         return (
