@@ -1,4 +1,12 @@
 import React, {Component} from 'react'
+import styled from 'styled-components'
+
+const FormDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    margin: 0 auto;
+`
 
 class SignUpLogIn extends Component {
 
@@ -33,7 +41,7 @@ class SignUpLogIn extends Component {
 
     render() {
         return (
-            <div>
+            <FormDiv>
                 <form>
                     <div>
                         <label htmlFor="email">E-mail: </label>
@@ -52,7 +60,7 @@ class SignUpLogIn extends Component {
                     <button onClick={this.signUp}>Sign Up</button>
                     <button onClick={this.signIn}>Log In</button>
                 </form>
-            </div>
+            </FormDiv>
         )
     }
 }

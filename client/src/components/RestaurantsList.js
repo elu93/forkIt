@@ -10,7 +10,7 @@ const RestaurantsList = (props) => {
     })
     return (
         <div>
-            <h1>Posts</h1>
+            <h1>Restaurants</h1>
             {restaurants}
         </div>
     )

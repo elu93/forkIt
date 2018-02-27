@@ -7,7 +7,7 @@ class StickyNav extends Component {
     render() {
         
         return (
-            <Navbar brand='logo' right>
+            <Navbar className="#ef5350 red lighten-1"brand='forkIt' right>
                 <NavItem href='get-started.html'>
                     <Icon>search</Icon>
                 </NavItem>
