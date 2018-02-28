@@ -15,8 +15,7 @@ class App extends Component {
   state = {
     signedIn: false,
     posts: [],
-    restaurants: [],
-    newPost: {}
+    restaurants: []
   }
 
   async componentWillMount() {

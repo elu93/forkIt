@@ -6,7 +6,13 @@ class RestaurantShow extends Component {
     state = {
         restaurant: {},
         posts: [],
-        users: {}
+        users: {},
+        newPost: {
+            title: "",
+            content: "",
+            user_id: 15,
+            restaurant_id: `${parseInt(this.props.match.params.id)}`
+        }
     }
     async componentWillMount() {
         const response = await axios.get(`/restaurants/${this.props.match.params.id}`)
@@ -25,6 +31,38 @@ class RestaurantShow extends Component {
         console.log(this.state.users)
         
     }
+
+    addNewPost = (newPost) => {
+        const posts = [...this.state.posts]
+        posts.push(newPost)
+        this.componentWillMount()
+        this.setState({posts: posts})
+    }
+
+    handleChange = (event) => {
+        const attribute = event.target.name
+        const val = event.target.value
+        const newPost = {...this.state.newPost}
+        newPost[attribute] = val
+        this.setState({newPost})
+    }
+
+    newPostPost = () => {
+        axios.post(`/posts`, this.state.newPost)
+        .then((response) => {
+            const updateNewPost = this.state.newPost
+            updateNewPost._id = response.data._id
+            this.addNewPost(updateNewPost)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.newPostPost()
+    }
+
     render() {
         return (
             <div>
@@ -32,6 +70,11 @@ class RestaurantShow extends Component {
                 <img src={this.state.restaurant.image} />
                 <div><Link to={`/restaurants/${this.state.restaurant.id}/foods`}>View Menu</Link></div>
                 <Link to="/posts/new">Add a Post</Link>
+                <form onSubmit={this.handleSubmit}>
+                <input name="title" placeholder="Title" type="text" onChange={this.handleChange}/>
+                <input name="content" placeholder="Content" type="text" onChange={this.handleChange}/>
+                <button type="submit" value="submit">Submit</button>
+                </form>
                 {
                     this.state.posts.map((post) => {
                         return (
