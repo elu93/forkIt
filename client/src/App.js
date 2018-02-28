@@ -8,13 +8,15 @@ import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } fro
 import StickyNav from './components/materialize/Navbar.js'
 import RestaurantShow from './components/RestaurantShow'
 import FoodsComponent from './components/FoodsComponent'
+import NewPost from './components/NewPost'
 
 class App extends Component {
 
   state = {
     signedIn: false,
     posts: [],
-    restaurants: []
+    restaurants: [],
+    newPost: {}
   }
 
   async componentWillMount() {
@@ -116,6 +118,33 @@ deletePost = async (postId) => {
   }
 }
 
+addNewPost = (newPost) => {
+  const posts = [...this.state.posts]
+  posts.push(newPost)
+  this.setState({posts: posts})
+}
+
+addPost = () => {
+    axios.post('/posts', this.state.newPost)
+    .then((response) => {
+      const newPost = this.state.newPost
+      newPost._id = response.data._id
+      this.addNewPost(newPost)
+    }).catch((error) => {
+      console.log(error)
+    })
+}
+
+handleChange = (event) => {
+  const attribute = event.target.name
+  const val = event.target.value
+  const newPost = { ...this.state.newPost }
+  newPost[attribute] = val
+
+  this.setState({ newPost })
+
+}
+
   render() {
 
     const SignUpLogInComponent = () => (
@@ -136,6 +165,12 @@ deletePost = async (postId) => {
       />
     )
 
+    const newPostComponent = (props) => {
+      return (
+        <NewPost {...props} handleChange={this.handleChange} newPost={this.addPost} />
+      )
+    }
+
     return (
       <Router>
         <div>
@@ -146,12 +181,13 @@ deletePost = async (postId) => {
           <Switch>
             <Route exact path="/signUp" render={SignUpLogInComponent} />
             <Route exact path="/posts" render={PostsComponent} />
+            <Route exact path="/posts/new" render={newPostComponent} />
             <Route exact path="/restaurants" render={RestaurantComponent} />
             <Route exact path="/restaurants/:id" component={RestaurantShow}/>
-            <Route exact path="/foods" component={FoodsComponent} />
+            <Route exact path="/restaurants/:id/foods" component={FoodsComponent} />
           </Switch>
 
-          {this.state.signedIn ? <Redirect to="/restaurants" /> : <Redirect to="/signUp" />}
+          {this.state.signedIn ? <Redirect to="/posts" /> : <Redirect to="/signUp" />}
         </div>
       </Router>
     )

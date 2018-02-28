@@ -5,11 +5,13 @@ import {Link} from 'react-router-dom'
 class RestaurantShow extends Component {
     state = {
         restaurant: {},
-        posts: []
+        posts: [],
+        users: {}
     }
     async componentWillMount() {
         const response = await axios.get(`/restaurants/${this.props.match.params.id}`)
         const resPost = await axios.get(`/posts`)
+        const resUsers = await axios.get('/users')
         const postArray = []
         const id = parseInt(this.props.match.params.id)
 
@@ -19,7 +21,8 @@ class RestaurantShow extends Component {
             }
         })
         postArray.reverse()
-        this.setState({restaurant: response.data, posts: postArray})
+        this.setState({restaurant: response.data, posts: postArray, users: resUsers.data})
+        console.log(this.state.users)
         
     }
     render() {
@@ -27,7 +30,8 @@ class RestaurantShow extends Component {
             <div>
                 <h1>{this.state.restaurant.name}</h1>
                 <img src={this.state.restaurant.image} />
-                <div><Link to="/foods">View Menu</Link></div>
+                <div><Link to={`/restaurants/${this.state.restaurant.id}/foods`}>View Menu</Link></div>
+                <Link to="/posts/new">Add a Post</Link>
                 {
                     this.state.posts.map((post) => {
                         return (
