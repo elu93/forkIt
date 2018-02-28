@@ -11,7 +11,7 @@ class FoodsController < ApplicationController
     
     def create
         @foods = Food.create!(foods_params)
-        redirect_to "/cities/#{@foods.id}" 
+        redirect_to "/foods/#{@foods.id}" 
     end
     
     def update
