@@ -24,7 +24,7 @@ const RestaurantsList = (props) => {
     return (
         <CardDiv>
             <h1>Restaurants</h1>
-            <Link to='/spotlight'>Spotlight Restaurant</Link>
+            <Link to='/spotlight'>This weeks spotlight...</Link>
             {restaurants}
         </CardDiv>
     )
