@@ -5,11 +5,11 @@ import axios from 'axios'
 import PostsList from './components/PostsList'
 import RestaurantsList from './components/RestaurantsList'
 import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } from './util/SessionHeaderUtil';
-import StickyNav from './components/materialize/Navbar.js'
 import RestaurantShow from './components/RestaurantShow'
 import FoodsComponent from './components/FoodsComponent'
 import NewPost from './components/NewPost'
 import {Navbar, NavItem, Icon} from "react-materialize";
+import Spotlight from './components/Spotlight'
 
 class App extends Component {
 
@@ -187,6 +187,7 @@ handleChange = (event) => {
                 </NavItem>
             </Navbar>
           <Switch>
+            <Route exact path="/spotlight" component={Spotlight} />
             <Route exact path="/signUp" render={SignUpLogInComponent} />
             <Route exact path="/posts" render={PostsComponent} />
             <Route exact path="/posts/new" render={newPostComponent} />

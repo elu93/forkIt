@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
-import OnFire from '../Onfire/MP4/Onfire.mp4'
-import OnFireWebM from '../Onfire/Webm/Onfire.webm'
-import OnfireJpeg from '../Onfire/Snapshot/Onfire.jpg'
 
 const FormDiv = styled.div`
     margin: 0 auto;
