@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
-import {Row, CardPanel, Col} from "react-materialize";
+import {CardPanel} from "react-materialize";
 
 const CardDiv = styled.div `     
     margin: 0 auto;     

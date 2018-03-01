@@ -175,7 +175,7 @@ handleChange = (event) => {
     return (
       <Router>
         <div>
-        <Navbar className="#ef5350 red lighten-1"brand='forkIt' right>
+          <Navbar className="#ef5350 red lighten-1"brand='forkIt' right>
                 <NavItem>
                     <Link to='/restaurants'><Icon>search</Icon></Link>
                 </NavItem>
