@@ -9,6 +9,7 @@ import StickyNav from './components/materialize/Navbar.js'
 import RestaurantShow from './components/RestaurantShow'
 import FoodsComponent from './components/FoodsComponent'
 import NewPost from './components/NewPost'
+import {Navbar, NavItem, Icon} from "react-materialize";
 
 class App extends Component {
 
@@ -149,7 +150,8 @@ handleChange = (event) => {
     const SignUpLogInComponent = () => (
       <SignUpLogIn
         signUp={this.signUp}
-        signIn={this.signIn} />
+        signIn={this.signIn}
+        signOut={this.signOut} />
     )
 
     const PostsComponent = () => (
@@ -173,10 +175,17 @@ handleChange = (event) => {
     return (
       <Router>
         <div>
-        <StickyNav />
-        <button onClick={this.signOut}>Sign Out</button>
-        <Link to="/restaurants">Go to Restaurants</Link>
-        <Link to="/signUp">Home</Link>
+        <Navbar className="#ef5350 red lighten-1"brand='forkIt' right>
+                <NavItem>
+                    <Link to='/restaurants'><Icon>search</Icon></Link>
+                </NavItem>
+                <NavItem>
+                    <Link to='/signup'><Icon>refresh</Icon></Link>
+                </NavItem>
+                <NavItem href="/signup" onClick={this.signOut}>
+                    <Icon>more_vert</Icon>
+                </NavItem>
+            </Navbar>
           <Switch>
             <Route exact path="/signUp" render={SignUpLogInComponent} />
             <Route exact path="/posts" render={PostsComponent} />

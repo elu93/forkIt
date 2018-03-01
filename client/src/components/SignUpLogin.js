@@ -1,11 +1,23 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import OnFire from '../Onfire/MP4/Onfire.mp4'
+import OnFireWebM from '../Onfire/Webm/Onfire.webm'
+import OnfireJpeg from '../Onfire/Snapshot/Onfire.jpg'
 
 const FormDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    width: 100vw;
     margin: 0 auto;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1 0 auto;
+    background: linear-gradient(0deg, rgba(36,35,37,0.6), rgba(36,35,37,0.6)), url("https://source.unsplash.com/L1ZhjK-R6uc") center no-repeat;
+    background-size: cover;
+`
+
+const Labels = styled.label`
+    color: white;
 `
 
 class SignUpLogIn extends Component {
@@ -33,6 +45,14 @@ class SignUpLogIn extends Component {
         )
     }
 
+    signOut = (event) => {
+        event.preventDefault()
+        this.props.signOut(
+            this.state.email,
+            this.state.password
+        )
+    }
+
     handleChange = (event) => {
         const newState = {...this.state}
         newState[event.target.name] = event.target.value
@@ -44,15 +64,15 @@ class SignUpLogIn extends Component {
             <FormDiv>
                 <form>
                     <div>
-                        <label htmlFor="email">E-mail: </label>
+                        <Labels htmlFor="email">E-mail: </Labels>
                         <input onChange={this.handleChange} type="text" name="email" value={this.state.email}/>
                     </div>
                     <div>
-                        <label htmlFor="password">Password: </label>
+                        <Labels htmlFor="password">Password: </Labels>
                         <input onChange={this.handleChange} type="password" name="password" value={this.state.password}/>
                     </div>
                     <div>
-                        <label htmlFor="password_confirmation">Confirm Password: </label>
+                        <Labels htmlFor="password_confirmation">Confirm Password: </Labels>
                         <input onChange={this.handleChange} type="password" name="password_confirmation"
                                 value={this.state.password_confirmation}/>
                     </div>

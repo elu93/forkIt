@@ -1,5 +1,18 @@
 import React from 'react'
 import Post from "./Post"
+import styled from 'styled-components'
+
+const CardDiv = styled.div`     
+    margin: 0 auto;     
+    width: 50vw;    
+    display: flex;    
+    justify-content: center;
+    flex-direction: column; 
+
+    h1{
+        text-align: center; 
+    }
+`
 
 const PostsList = (props) => {
 
@@ -9,11 +22,10 @@ const PostsList = (props) => {
         )
     })
     return (
-        <div>
+        <CardDiv>
             <h1>Posts</h1>
-
             {props.posts.length > 0 ? posts : null}
-        </div>
+        </CardDiv>
     )
 }
 
