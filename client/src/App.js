@@ -175,15 +175,15 @@ handleChange = (event) => {
     return (
       <Router>
         <div>
-          <Navbar className="#ef5350 red lighten-1"brand='forkIt' right>
+          <Navbar className="#ef5350 red lighten-1" brand='forkIt' right>
                 <NavItem>
-                    <Link to='/restaurants'><i class="fa fa-bars"></i></Link>
+                    <Link to='/restaurants'>Restaurants</Link>
                 </NavItem>
                 <NavItem>
-                    <Link to='/signup'><Icon>refresh</Icon></Link>
+                    <Link to='/signup'>Sign-Up</Link>
                 </NavItem>
                 <NavItem href="/signup" onClick={this.signOut}>
-                    <Icon>more_vert</Icon>
+                    Sign-Out
                 </NavItem>
             </Navbar>
           <Switch>
