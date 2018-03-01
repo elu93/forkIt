@@ -14,6 +14,10 @@ const CardDiv = styled.div `
     text-align: center;
 `
 
+const CardWrapper = styled.div`
+    width: 100%;
+`
+
 class RestaurantShow extends Component {
     state = {
         restaurant: {},
@@ -108,14 +112,12 @@ class RestaurantShow extends Component {
                     .posts
                     .map((post) => {
                         return (
-                            <Row>
-                                <Col s={12} m={12}>
-                                    <CardPanel m={12} className="left-align">
-                                        <h3>{post.title}</h3>
-                                        <p>{post.content}</p>
-                                    </CardPanel>
-                                </Col>
-                            </Row>
+                            <CardWrapper>
+                                <CardPanel className="left-align">
+                                <h3>{post.title}</h3>
+                                <p>{post.content}</p>
+                            </CardPanel>
+                            </CardWrapper>
                         )
                     })
 }

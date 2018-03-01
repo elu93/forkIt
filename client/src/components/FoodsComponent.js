@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import styled from 'styled-components'
+import {CardPanel} from "react-materialize";
+
+const CardDiv = styled.div`     
+    margin: 0 auto;     
+    width: 50vw;    
+    display: flex;     
+    justify-content: center;
+    flex-direction: column; 
+    text-align: center;
+`
 
 class FoodsComponent extends Component {
     state = {
@@ -20,19 +31,20 @@ class FoodsComponent extends Component {
     render() {
         
         return (
-            <div>
+            <CardDiv>
+                <h1>Menu</h1>
                 { 
                     this.state.menu.map((food) => {
                         return (
-                            <div>
+                            <CardPanel className="left-align">
                                 <h3>{food.name}</h3>
-                                <p>${food.price}</p>
+                                <p>Price: ${food.price}</p>
                                 <p>{food.description}</p>
-                            </div>
+                            </CardPanel>
                         )
                     })
                 }
-            </div>
+            </CardDiv>
         );
     }
 }
