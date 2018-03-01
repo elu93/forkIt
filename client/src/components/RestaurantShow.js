@@ -28,7 +28,8 @@ class RestaurantShow extends Component {
             content: "",
             user_id: 15,
             restaurant_id: `${parseInt(this.props.match.params.id)}`
-        }
+        },
+        isNewPost: false
     }
     async componentWillMount() {
         const response = await axios.get(`/restaurants/${this.props.match.params.id}`)
