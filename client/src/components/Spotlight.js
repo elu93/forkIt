@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {setZomatoDefaults, setAxiosDefaults} from '../util/SessionHeaderUtil';
-
+import {Card, CardTitle, CardPanel} from 'react-materialize'
 class Spotlight extends Component {
     state = {
         spotlight: []
@@ -29,7 +29,10 @@ class Spotlight extends Component {
                     this.state.spotlight.map((restaurant) => {
                         return (
                             <div>
-                                <p>{restaurant.restaurant.name}</p>
+                                <Card className='small' header={<CardTitle image={restaurant.restaurant.featured_image}>{restaurant.restaurant.name}</CardTitle>} actions={[<a href={restaurant.restaurant.url}>Find out more...</a>]}>
+                                    <p>Address: {restaurant.restaurant.location.address}, {restaurant.restaurant.location.city}<span> Cuisine: {restaurant.restaurant.cuisines}</span></p>
+                                    <p>Ratings: {restaurant.restaurant.user_rating.aggregate_rating} {restaurant.restaurant.user_rating.rating_text}</p>
+                                </Card>
                             </div>
                         )
                     })
