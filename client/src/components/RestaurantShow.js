@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import {CardPanel} from "react-materialize";
+import NewPost from './NewPost';
 
 const CardDiv = styled.div `     
     margin: 0 auto;     
@@ -55,7 +56,7 @@ class RestaurantShow extends Component {
         const posts = [...this.state.posts]
         posts.push(newPost)
         this.componentWillMount()
-        this.setState({posts: posts})
+        this.setState({posts: posts, isNewPost: false})
     }
 
     handleChange = (event) => {
@@ -88,26 +89,14 @@ class RestaurantShow extends Component {
 
     render() {
         return (
+            this.state.isNewPost ? <NewPost handleChange={this.handleChange} posts={this.state.posts} handleSubmit={this.handleSubmit} newPostPost={this.state.newPostPost} /> :
             <CardDiv>
                 <h1>{this.state.restaurant.name}</h1>
                 <img width="400" src={this.state.restaurant.image}/>
                 <div>
                     <Link to={`/restaurants/${this.state.restaurant.id}/foods`}>View Menu</Link>
                 </div>
-                <Link to="/posts/new">Add a Post</Link>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        name="title"
-                        placeholder="Title"
-                        type="text"
-                        onChange={this.handleChange}/>
-                    <input
-                        name="content"
-                        placeholder="Content"
-                        type="text"
-                        onChange={this.handleChange}/>
-                    <button type="submit" value="submit">Submit</button>
-                </form>
+                <button onClick={() => { {this.setState({isNewPost: true})}}}>Add Review</button>
                 {this
                     .state
                     .posts
