@@ -8,7 +8,7 @@ import { saveAuthTokens, setAxiosDefaults, userIsLoggedIn, clearAuthTokens } fro
 import RestaurantShow from './components/RestaurantShow'
 import FoodsComponent from './components/FoodsComponent'
 import NewPost from './components/NewPost'
-import {Navbar, NavItem, Icon} from "react-materialize";
+import {Navbar, NavItem} from "react-materialize";
 import Spotlight from './components/Spotlight'
 
 class App extends Component {
@@ -16,10 +16,12 @@ class App extends Component {
   state = {
     signedIn: false,
     posts: [],
+    currentUser: {},
     restaurants: []
   }
 
   async componentWillMount() {
+    let currentUser = {}
     try {
       const signedIn = userIsLoggedIn()
       let posts = []
@@ -27,12 +29,24 @@ class App extends Component {
       if (signedIn) {
         setAxiosDefaults()
         posts = await this.getPosts()
+        let user = posts[0].user_id
+        currentUser = await this.getCurrentUser(user)
       }
 
-      this.setState({ posts, signedIn, restaurants })
-
+      this.setState({ posts, signedIn, restaurants, currentUser: currentUser})
+      console.log(this.state.currentUser)
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  getCurrentUser = async (userId) => {
+    try {
+      const response = await axios.get(`/users/${userId}`)
+      return response.data
+    } catch(error) {
+      console.log(error)
+      return {}
     }
   }
 
@@ -40,6 +54,7 @@ class App extends Component {
     try {
       const response = await axios.get('/posts')
       return response.data
+      
 
     } catch (error) {
       console.log(error)
@@ -76,6 +91,7 @@ class App extends Component {
   }
 
   signIn = async (email, password) => {
+    let currentUser = {}
     try {
       const payload = {
         email,
@@ -86,7 +102,9 @@ class App extends Component {
 
       const posts = await this.getPosts()
 
-      this.setState({ signedIn: true, posts })
+      let user = posts[0].user_id
+      currentUser = await this.getCurrentUser(user)
+      this.setState({ signedIn: true, posts, currentUser })
 
     } catch (error) {
       console.log(error)
@@ -157,14 +175,22 @@ handleChange = (event) => {
     const PostsComponent = () => (
       <PostsList 
       posts={this.state.posts}
+      currentUser={this.state.currentUser}
       deletePost={this.deletePost} />
     )
 
     const RestaurantComponent = () => (
       <RestaurantsList 
       restaurants={this.state.restaurants}
+      currentUser={this.state.currentUser}
       />
     )
+
+    const RestaurantShowComponent = (props) => {
+      return (
+          <RestaurantShow {...props} currentUser={this.state.currentUser} />
+      )
+  }
 
     const newPostComponent = (props) => {
       return (
@@ -180,7 +206,7 @@ handleChange = (event) => {
                     <Link to='/restaurants'>Restaurants</Link>
                 </NavItem>
                 <NavItem>
-                    <Link to='/signup'>Sign-Up</Link>
+                    <Link to='/posts'>Posts</Link>
                 </NavItem>
                 <NavItem href="/signup" onClick={this.signOut}>
                     Sign-Out
@@ -192,7 +218,7 @@ handleChange = (event) => {
             <Route exact path="/posts" render={PostsComponent} />
             <Route exact path="/posts/new" render={newPostComponent} />
             <Route exact path="/restaurants" render={RestaurantComponent} />
-            <Route exact path="/restaurants/:id" component={RestaurantShow}/>
+            <Route exact path="/restaurants/:id" render={RestaurantShowComponent}/>
             <Route exact path="/restaurants/:id/foods" component={FoodsComponent} />
           </Switch>
 

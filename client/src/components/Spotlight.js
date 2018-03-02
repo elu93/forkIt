@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {setZomatoDefaults, setAxiosDefaults} from '../util/SessionHeaderUtil';
-import {Card, CardTitle, CardPanel, Row, Col} from 'react-materialize'
+import {Card, CardTitle} from 'react-materialize'
 import styled from 'styled-components'
 
 
@@ -12,13 +12,6 @@ const CardDiv = styled.div`
     justify-content: center;
     flex-direction: column; 
     text-align: center;
-`
-
-const CardWrapper = styled.div`
-    display: flex;
-    width: 50%;
-    flex-wrap: wrap;
-    flex-direction: row;
 `
 
 class Spotlight extends Component {

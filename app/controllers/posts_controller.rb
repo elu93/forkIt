@@ -8,6 +8,12 @@ class PostsController < ApplicationController
         render json: @posts
     end
 
+    def allposts
+        @user = current_user
+        @posts = Post.all
+        render json: @posts
+    end
+
     def show
         @post = Post.find(params[:id])
 

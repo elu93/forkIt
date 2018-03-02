@@ -9,13 +9,12 @@ const CardDiv = styled.div`
     justify-content: center;
     flex-direction: column; 
 
-    h1{
+    h2, h3{
         text-align: center; 
     }
 `
 
 const PostsList = (props) => {
-
     const posts = props.posts.map((post) => {
         return (
             <Post {...post} deletePost={props.deletePost} key={post.id}/>
@@ -23,7 +22,8 @@ const PostsList = (props) => {
     })
     return (
         <CardDiv>
-            <h1>Posts</h1>
+            <h2>Welcome, {props.currentUser.email}</h2>
+            <h3>Posts</h3>
             {props.posts.length > 0 ? posts : null}
         </CardDiv>
     )

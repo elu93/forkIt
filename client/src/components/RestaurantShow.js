@@ -27,7 +27,7 @@ class RestaurantShow extends Component {
         newPost: {
             title: "",
             content: "",
-            user_id: 15,
+            user_id: this.props.currentUser,
             restaurant_id: `${parseInt(this.props.match.params.id)}`
         },
         isNewPost: false

@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardPanel} from "react-materialize";
+import {CardPanel, Icon} from "react-materialize";
 import styled from 'styled-components'
 
 const CardDiv = styled.div`     
@@ -10,6 +10,11 @@ const CardDiv = styled.div`
     flex-direction: column; 
 `
 
+const SpanDiv = styled.span`
+    display:block;
+    text-align: center;
+`
+
 const Post = (props) => {
     const deletePost = () => {
         props.deletePost(props.id)
@@ -18,8 +23,9 @@ const Post = (props) => {
         <CardDiv>
             <CardPanel className="black-text">
                 <h3>{props.title}</h3>
-                <span>{props.content}</span>
-                <button onClick={deletePost}>Delete</button>
+                <SpanDiv>{props.content}</SpanDiv>
+                <SpanDiv onClick={deletePost}><Icon >delete_forever</Icon></SpanDiv>
+                
             </CardPanel>
         </CardDiv>
     )
